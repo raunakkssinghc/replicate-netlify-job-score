@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Description Finder API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .endpoint {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #007bff;
+        }
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .example {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Job Description Finder API</h1>
+        
+        <p>This API extracts job description text from job posting URLs using DeepSeek's web search capabilities. Simply provide a job link and get back the job description text.</p>
+        
+        <div class="endpoint">
+            <h3>📡 Endpoint</h3>
+            <p><strong>POST</strong> <code>/.netlify/functions/extract-job-details</code></p>
+        </div>
+        
+        <div class="endpoint">
+            <h3>📥 Request Format</h3>
+            <div class="example">
+<pre>{
+  "job_link": "https://example.com/jobs/data-engineer"
+}</pre>
+            </div>
+        </div>
+        
+        <div class="endpoint">
+            <h3>📤 Response Format</h3>
+            <div class="example">
+<pre>{
+  "job_description": "We are looking for a talented Software Engineer to join our team..."
+}</pre>
+            </div>
+        </div>
+        
+        <div class="endpoint">
+            <h3>🔧 Features</h3>
+            <ul>
+                <li>✅ <strong>DeepSeek Web Search</strong> - Uses DeepSeek's built-in web access capabilities</li>
+                <li>✅ <strong>AI-Powered Extraction</strong> - AI directly accesses and extracts job description text</li>
+                <li>✅ <strong>CORS Enabled</strong> - Ready for cross-origin requests</li>
+                <li>✅ <strong>Error Handling</strong> - Clear error messages for debugging</li>
+            </ul>
+        </div>
+        
+        <div class="endpoint">
+            <h3>🔗 n8n Integration</h3>
+            <p>Use the <strong>HTTP Request</strong> node in n8n with:</p>
+            <ul>
+                <li><strong>Method:</strong> POST</li>
+                <li><strong>URL:</strong> <code>https://your-site.netlify.app/.netlify/functions/extract-job-details</code></li>
+                <li><strong>Headers:</strong> <code>Content-Type: application/json</code></li>
+                <li><strong>Body:</strong> JSON with <code>job_link</code> (the URL of the job posting)</li>
+            </ul>
+        </div>
+        
+        <div class="endpoint">
+            <h3>💡 How It Works</h3>
+            <ol>
+                <li><strong>Input:</strong> Provide a job posting URL</li>
+                <li><strong>DeepSeek Access:</strong> DeepSeek directly accesses the web page</li>
+                <li><strong>AI Extraction:</strong> AI extracts the job description text</li>
+                <li><strong>Output:</strong> Returns the job description as plain text</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

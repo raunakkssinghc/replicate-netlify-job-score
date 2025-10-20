@@ -139,17 +139,33 @@ export const handler = async (event, context) => {
         }
 
         // Validate required fields
-        if (!job_title || !job_description || !job_type) {
+        if (!job_title || !job_type) {
             return {
                 statusCode: 400,
                 headers,
                 body: JSON.stringify({
-                    error: "Missing required fields: job_title, job_description, and job_type",
+                    error: "Missing required fields: job_title and job_type are required",
                     received: {
                         job_title: job_title || null,
                         job_description: job_description || null,
                         job_type: job_type || null
                     }
+                })
+            };
+        }
+
+        // Handle missing job description
+        if (!job_description || job_description === null || job_description.trim() === '') {
+            // Return default response for missing job description
+            return {
+                statusCode: 200,
+                headers,
+                body: JSON.stringify({
+                    relevance_result: JSON.stringify({
+                        score: 0,
+                        relevant: false,
+                        reason: "Missing job description - cannot evaluate relevance without job details"
+                    })
                 })
             };
         }

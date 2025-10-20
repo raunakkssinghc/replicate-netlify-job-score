@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Experience Level Finder - Web Search API</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #007bff;
+            transition: transform 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-2px);
+        }
+        code {
+            background: #e9ecef;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+        .example {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            border: 1px solid #dee2e6;
+        }
+        .experience-bins {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .bin {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            text-align: center;
+        }
+        .bin.entry { border-color: #28a745; }
+        .bin.mid { border-color: #ffc107; }
+        .bin.senior { border-color: #fd7e14; }
+        .bin.lead { border-color: #dc3545; }
+        .test-section {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .api-demo {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Job Experience Level Finder</h1>
+        <p style="text-align: center; font-size: 1.2em; color: #666; margin-bottom: 40px;">
+            Extract experience level requirements from job postings using DeepSeek's web search capabilities
+        </p>
+        
+        <div class="feature-card">
+            <h3>🚀 How It Works</h3>
+            <ol>
+                <li><strong>Input:</strong> Provide a job posting URL</li>
+                <li><strong>DeepSeek Web Search:</strong> AI searches and analyzes the job posting</li>
+                <li><strong>Experience Detection:</strong> Identifies experience requirements and seniority level</li>
+                <li><strong>Classification:</strong> Maps to standardized experience bins</li>
+                <li><strong>Output:</strong> Returns structured experience level data</li>
+            </ol>
+        </div>
+
+        <div class="feature-card">
+            <h3>📊 Experience Level Bins</h3>
+            <div class="experience-bins">
+                <div class="bin entry">
+                    <strong>Entry (0-2 Years)</strong><br>
+                    <small>1+ years, Junior, Associate</small>
+                </div>
+                <div class="bin mid">
+                    <strong>Mid (3-5 Years)</strong><br>
+                    <small>2+ years, Intermediate</small>
+                </div>
+                <div class="bin senior">
+                    <strong>Senior (6-8 Years)</strong><br>
+                    <small>5+ years, Senior title</small>
+                </div>
+                <div class="bin lead">
+                    <strong>Lead (8+ Years)</strong><br>
+                    <small>8+ years, Lead, Principal</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="feature-card">
+            <h3>📡 API Endpoint</h3>
+            <p><strong>POST</strong> <code>/.netlify/functions/job-experience-web-search</code></p>
+        </div>
+        
+        <div class="feature-card">
+            <h3>📥 Request Format</h3>
+            <div class="example">
+<pre>{
+  "job_link": "https://jobs.example.com/senior-software-engineer"
+}</pre>
+            </div>
+        </div>
+        
+        <div class="feature-card">
+            <h3>📤 Response Format</h3>
+            <div class="example">
+<pre>{
+  "job_link": "https://jobs.example.com/senior-software-engineer",
+  "experience_level": "Senior (6-8 Years)",
+  "found_requirements": "Found '5+ years of experience' in job description",
+  "confidence": "high"
+}</pre>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>🧪 Test Examples</h3>
+            <p>Try these sample job links to see the experience level detection in action:</p>
+            <div class="example">
+<pre>// Senior AI Engineer
+{"job_link": "https://jobs.teradata.com/senior-ai-engineer"}
+
+// Entry Level Data Analyst  
+{"job_link": "https://example.com/jobs/entry-data-analyst"}
+
+// Lead Software Engineer
+{"job_link": "https://example.com/jobs/lead-engineer"}</pre>
+            </div>
+        </div>
+
+        <div class="api-demo">
+            <h3>🔧 cURL Example</h3>
+            <div class="example">
+<pre>curl -X POST https://your-site.netlify.app/.netlify/functions/job-experience-web-search \
+  -H "Content-Type: application/json" \
+  -d '{"job_link": "https://jobs.example.com/software-engineer"}'</pre>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <h3>✨ Key Features</h3>
+            <ul>
+                <li>✅ <strong>No Scraping Required</strong> - Uses DeepSeek's built-in web search</li>
+                <li>✅ <strong>AI-Powered Analysis</strong> - Intelligent experience level detection</li>
+                <li>✅ <strong>Standardized Output</strong> - Consistent experience level bins</li>
+                <li>✅ <strong>Confidence Scoring</strong> - Know how reliable the detection is</li>
+                <li>✅ <strong>Retry Logic</strong> - Robust error handling with automatic retries</li>
+                <li>✅ <strong>CORS Enabled</strong> - Ready for cross-origin requests</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <h3>🔗 Integration Options</h3>
+            <p><strong>n8n Workflow:</strong> Use HTTP Request node with the endpoint</p>
+            <p><strong>Zapier:</strong> Webhooks integration for job processing</p>
+            <p><strong>Custom Apps:</strong> Direct API calls for job board integrations</p>
+        </div>
+    </div>
+</body>
+</html>
+

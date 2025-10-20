@@ -6,6 +6,7 @@ const replicate = new Replicate({
 });
 
 // Function to extract job details and experience level using DeepSeek web search
+// VERSION: 2024-12-19-v2-with-job-title-cleaning
 async function extractJobDetailsWithRetry(jobLink, maxRetries = 3) {
     const prompt = `You have web search capabilities. Please search for and analyze the job posting at this URL: ${jobLink}
 
@@ -174,7 +175,11 @@ export const handler = async (event, context) => {
         return {
             statusCode: 200,
             headers,
-            body: JSON.stringify(result)
+            body: JSON.stringify({
+                ...result,
+                version: "2024-12-19-v2-with-job-title-cleaning",
+                timestamp: new Date().toISOString()
+            })
         };
         
     } catch (error) {
